@@ -19,18 +19,18 @@ const ContactForm = () => {
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!re.test(email)) return "Please enter a valid email address.";
-    
+
     const blockedDomains = ["test.com", "example.com", "temp.com", "fake.com"];
     const domain = email.split("@")[1];
     if (blockedDomains.includes(domain)) return "Please use a real email address.";
-    
+
     return "";
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
-    
+
     const emailError = validateEmail(email);
     if (emailError) {
       setError(emailError);
@@ -46,7 +46,7 @@ const ContactForm = () => {
       });
       const data = await res.json();
       if (data.error) throw new Error(data.error);
-      
+
       setShowSuccess(true);
       setFullName("");
       setEmail("");
@@ -66,7 +66,7 @@ const ContactForm = () => {
             <Label htmlFor="fullname" className="text-foreground/80 font-semibold">Full Name</Label>
             <Input
               id="fullname"
-              placeholder="Rajan Prajapati"
+              placeholder="Your name"
               type="text"
               required
               value={fullName}
@@ -78,7 +78,7 @@ const ContactForm = () => {
             <Label htmlFor="email" className="text-foreground/80 font-semibold">Email Address</Label>
             <Input
               id="email"
-              placeholder="rajan@example.com"
+              placeholder="email@example.com"
               type="email"
               required
               value={email}
@@ -102,7 +102,7 @@ const ContactForm = () => {
         </div>
 
         {error && (
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             className="text-red-500 text-sm font-medium flex items-center gap-2"
@@ -141,8 +141,8 @@ const ContactForm = () => {
             >
               {/* Animated Background Glow */}
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand to-transparent" />
-              
-              <motion.div 
+
+              <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
@@ -156,7 +156,7 @@ const ContactForm = () => {
                 Thank you, Rajan will get back to you shortly. A confirmation will be sent to your email.
               </p>
 
-              <Button 
+              <Button
                 onClick={() => setShowSuccess(false)}
                 className="w-full h-14 rounded-2xl bg-muted dark:bg-muted/80 hover:bg-muted/60 text-foreground font-bold transition-all border-border/50 border"
               >
